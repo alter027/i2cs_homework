@@ -1,0 +1,3 @@
+line 1 has 3 words, "I", "am", "Charles"
+line 2 has 5 words, "I", "am", "a", "handsome", "boy"
+line 3 has 4 words, "I", "love", "C++", "programming"
