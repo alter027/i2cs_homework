@@ -6,7 +6,13 @@ def test_key_val(key,val):
         print('Some Error in your input data!')
         return 0
     
-def test_datas(datas):
+def test_datas(key, val, datas):
+    if len(key) is not len(datas[0]):
+        print('Some Error in your input data!')
+        return 0
+    if len(val) is not len(datas):
+        print('Some Error in your input data!')
+        return 0
     tmp = len(datas[0])
     for i in datas:
         if len(i) is not tmp:
@@ -19,6 +25,8 @@ def others(plt,title,filename,figsize=(8,6),dpi=70):
         plt.title(title)
     if filename:
         plt.savefig(filename)
+    plt.rcParams['font.sans-serif']=['DFKai-SB']
+    plt.figure(figsize=figsize, dpi=dpi)
 
 def bar(keys,values,title='',filename='',figsize=None, dpi=None):
     test_key_val(keys,values)
@@ -28,7 +36,7 @@ def bar(keys,values,title='',filename='',figsize=None, dpi=None):
     plt.show()
     
 def stack_bar(keys,labels,*datas,title='',filename='',figsize=None, dpi=None):
-    if not test_datas(datas): return 
+    if not test_datas(keys,labels,datas): return 
     plt.figure() # 定義一個圖像窗口
     plt.subplot() # 創建小圖(分層圖)
     index = np.arange(len(keys)) # 形成等差數列
@@ -38,27 +46,17 @@ def stack_bar(keys,labels,*datas,title='',filename='',figsize=None, dpi=None):
     plt.legend(labels)
     others(plt,title,filename,figsize,dpi)
     plt.show()
-    
-def parrallel_bar(keys,labels,*datas,title='',filename='',figsize=None, dpi=None):
-    if not test_datas(datas): return 
-    lst = []
-    for i in datas:
-        lst += i
-    datas = lst
-    x = list(range(len(keys)))
+     
+def parallel_bar(keys,labels,*datas,title='',filename='',figsize=None, dpi=None):
+    if not test_datas(keys,labels,datas): return 
+    x = [i for i in range(len(keys))]
     n = len(labels) #種類個數
     total_width= 0.8 #所有長條的寬度和
-    Width = total_width / n  #各個長條的寬度
+    width = total_width/n  #各個長條的寬度
 
     for i in range(n): #每次畫一種類的長條圖
-        tmp_lst = datas[i*len(x):(i+1)*len(x)]            
-        plt.bar(x,tmp_lst,width=Width,label=labels[i],tick_label=keys)
-        # width: 該資料長條的寬度
-        # label: 該種類標籤名字
-        # tick_label: bar的標籤， 這個例子就是 Sun Mon Tue Wed Thu Fri Sat
-        # fc(facecolor): 顏色
-        for j in range(len(x)):  
-            x[j] = x[j] + Width
+        plt.bar(x,datas[i],width=width,label=labels[i],tick_label=keys)
+        x[:len(x)] = [ width+x[j] for j in range(len(x))]
      
     plt.legend()  # 顯示圖例
     others(plt,title,filename,figsize,dpi)
@@ -93,11 +91,11 @@ def pie(keys,values,title='',filename='',figsize=None, dpi=None):
             textprops = {'fontsize':12, 'color':'k'} # 設置文本標籤的屬性值
             )
     others(plt,title,filename,figsize,dpi)
-    plt.rcParams['font.sans-serif']=['DFKai-sb']
+    plt.rcParams['font.sans-serif']=['DFKai-SB']
     plt.show()
     
 def line(keys,labels,*datas,title='',filename='',figsize=None, dpi=None):
-    if not test_datas(datas): return 
+    if not test_datas(keys,labels,datas): return 
     plt.figure() # 定義一個圖像窗口
     plt.subplot() # 創建小圖(分層圖)
     index = np.arange(len(keys)) # 形成等差數列
