@@ -24,7 +24,7 @@ with open('bitcoin_data.json', 'w') as jsonFile:
         #轉換時間戳為時間數組
         timeStamp = dict2_elem[i]['time']
         timeArray = time.localtime(timeStamp)
-        data['time'] = time.strftime("%m/%d/%Y", timeArray)
+        data['time'] = time.strftime("%Y/%m/%d", timeArray)
         
         data['close'] = dict2_elem[i]['close']
         data['high'] = dict2_elem[i]['high']
