@@ -41,7 +41,7 @@ def stack_bar(keys,labels,*datas,title='',filename='',figsize=None, dpi=None):
     plt.subplot() # 創建小圖(分層圖)
     index = np.arange(len(keys)) # 形成等差數列
     for i in range(len(labels)):
-        # 每次疊上 data[:i] 的和
+        # 每次疊上 data[:i]
         plt.bar(index,datas[i],width=0.7,bottom=np.sum(datas[:i],axis=0),tick_label=keys)
     plt.legend(labels)
     others(plt,title,filename,figsize,dpi)
