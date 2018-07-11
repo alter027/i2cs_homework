@@ -20,24 +20,24 @@ def test_datas(key, val, datas):
             return 0
     return 1
 
-def others(plt,title,filename,figsize=(8,6),dpi=70):
+def others(plt,title,filename,figsize=[8,6],dpi=70):
+    plt.rcParams['font.sans-serif']=['DFKai-SB']
     if title:
         plt.title(title)
     if filename:
         plt.savefig(filename)
-    plt.rcParams['font.sans-serif']=['DFKai-SB']
-    plt.figure(figsize=figsize, dpi=dpi)
 
-def bar(keys,values,title='',filename='',figsize=None, dpi=None):
+def bar(keys,values,title='',filename='',figsize=[8,6],dpi=70):
     test_key_val(keys,values)
 
+    plt.figure(figsize=figsize, dpi=dpi)
     plt.bar(keys, values)  # tick_label = Key
     others(plt,title,filename,figsize,dpi)
     plt.show()
     
-def stack_bar(keys,labels,*datas,title='',filename='',figsize=None, dpi=None):
+def stack_bar(keys,labels,*datas,title='',filename='',figsize=[8,6],dpi=70):
     if not test_datas(keys,labels,datas): return 
-    plt.figure() # 定義一個圖像窗口
+    plt.figure(figsize=figsize, dpi=dpi)
     plt.subplot() # 創建小圖(分層圖)
     index = np.arange(len(keys)) # 形成等差數列
     for i in range(len(labels)):
@@ -47,8 +47,9 @@ def stack_bar(keys,labels,*datas,title='',filename='',figsize=None, dpi=None):
     others(plt,title,filename,figsize,dpi)
     plt.show()
      
-def parallel_bar(keys,labels,*datas,title='',filename='',figsize=None, dpi=None):
+def parallel_bar(keys,labels,*datas,title='',filename='',figsize=[8,6],dpi=70):
     if not test_datas(keys,labels,datas): return 
+    plt.figure(figsize=figsize, dpi=dpi)
     x = [i for i in range(len(keys))]
     n = len(labels) #種類個數
     total_width= 0.8 #所有長條的寬度和
@@ -62,7 +63,7 @@ def parallel_bar(keys,labels,*datas,title='',filename='',figsize=None, dpi=None)
     others(plt,title,filename,figsize,dpi)
     plt.show() # 顯示圖像 
     
-def radar(keys,values,title='',filename='',figsize=None, dpi=None):
+def radar(keys,values,title='',filename='',figsize=[8,6],dpi=70):
     test_key_val(keys,values)
     cnt = sum(values)/len(values)
     for i in range(len(values)):
@@ -73,7 +74,7 @@ def radar(keys,values,title='',filename='',figsize=None, dpi=None):
     datas = np.concatenate((datas, [datas[0]])) # 閉合圓形
     angles = np.concatenate((angles, [angles[0]])) # 閉合圓形
 
-    fig = plt.figure()
+    plt.figure(figsize=figsize, dpi=dpi)
     ax = fig.add_subplot(111, polar=True) # 轉換極座標
     ax.plot(angles, datas, 'bo-', linewidth=2) # 畫線
     ax.set_thetagrids(angles * 180/np.pi, labels)
@@ -82,8 +83,9 @@ def radar(keys,values,title='',filename='',figsize=None, dpi=None):
     others(plt,title,filename,figsize,dpi)
     plt.show()
     
-def pie(keys,values,title='',filename='',figsize=None, dpi=None):
+def pie(keys,values,title='',filename='',figsize=[8,6],dpi=70):
     test_key_val(keys,values)
+    plt.figure(figsize=figsize, dpi=dpi)
     plt.pie(x = values, # 繪圖數據
             labels=keys,
             autopct='%.1f%%', # 設置百分比的格式，這裏保留一位小數
@@ -94,9 +96,9 @@ def pie(keys,values,title='',filename='',figsize=None, dpi=None):
     plt.rcParams['font.sans-serif']=['DFKai-SB']
     plt.show()
     
-def line(keys,labels,*datas,title='',filename='',figsize=None, dpi=None):
+def line(keys,labels,*datas,title='',filename='',figsize=[8,6],dpi=70):
     if not test_datas(keys,labels,datas): return 
-    plt.figure() # 定義一個圖像窗口
+    plt.figure(figsize=figsize, dpi=dpi)
     plt.subplot() # 創建小圖(分層圖)
     index = np.arange(len(keys)) # 形成等差數列
     for i in datas:
