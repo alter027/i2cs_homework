@@ -100,8 +100,8 @@ def line(keys,labels,*datas,title='',filename='',figsize=None, dpi=None):
     plt.subplot() # 創建小圖(分層圖)
     index = np.arange(len(keys)) # 形成等差數列
     for i in datas:
-        x = [p[0] for p in i]
-        y = [p[1] for p in i]
+        x = [p for p in keys]
+        y = [p for p in i]
         plt.plot(x,y,'-o')
     plt.legend(labels)
     others(plt,title,filename,figsize,dpi)
