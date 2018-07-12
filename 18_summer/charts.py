@@ -74,7 +74,7 @@ def radar(keys,values,title='',filename='',figsize=[8,6],dpi=70):
     datas = np.concatenate((datas, [datas[0]])) # 閉合圓形
     angles = np.concatenate((angles, [angles[0]])) # 閉合圓形
 
-    plt.figure(figsize=figsize, dpi=dpi)
+    fig = plt.figure(figsize=figsize, dpi=dpi)
     ax = fig.add_subplot(111, polar=True) # 轉換極座標
     ax.plot(angles, datas, 'bo-', linewidth=2) # 畫線
     ax.set_thetagrids(angles * 180/np.pi, labels)
